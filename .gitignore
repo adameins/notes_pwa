@@ -1,0 +1,8 @@
+# FILES #
+.vscode
+.idea
+package-lock.json
+
+# DIRECTORIES #
+node_modules
+dist
