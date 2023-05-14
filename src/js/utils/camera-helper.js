@@ -95,9 +95,6 @@ const CameraHelper = {
 
       const data = this._canvasCameraEl.toDataURL('image/png');
 
-      
-      console.log("ini console take picture", data);
-
       this.streaming = false;
       return data;
     }
