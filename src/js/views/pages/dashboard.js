@@ -22,6 +22,9 @@ const Dashboard = {
     console.log('dashboard page');
 
     this._initialData();
+    
+    const userInfo = await AuthApi.getUserInfo();
+    this._populateNotesList(notesListEl, notes, allBookmarkedNotes, userInfo);
   },
 
   async _initialData() {
@@ -42,7 +45,7 @@ const Dashboard = {
     this._populateNotesList(notesListEl, notes, allBookmarkedNotes);
   },
 
-  _populateNotesList(containerEl, notes, allBookmarkedNotes) {
+  _populateNotesList(containerEl, notes, allBookmarkedNotes, userInfo) {
     containerEl.innerHTML = '';
 
     // Populate notes list with note item template
@@ -56,12 +59,14 @@ const Dashboard = {
         ? createRemoveBookmarkButtonTemplate(note.id)
         : createBookmarkButtonTemplate(note.id);
 
-      containerEl.innerHTML += `
-        <div class="col-12">
-          ${noteItemTemplate(note, bookmarkButton)}
-        </div>
-      `;
-    });
+        const noteItem = noteItemTemplate(note, bookmarkButton, userInfo);
+
+        containerEl.innerHTML += `
+          <div class="col-12">
+            ${noteItem}
+          </div>
+        `;
+      });
 
     // Add event listener to delete button for each note item
     containerEl.querySelectorAll(`#deleteNoteButton`).forEach((el) => {
@@ -108,7 +113,7 @@ const Dashboard = {
           console.log(error);
         }
       });
-    });
+    }); 
   },
 
   _populateNotesListEmpty(containerEl) {
