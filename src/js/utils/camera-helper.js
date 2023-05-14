@@ -94,12 +94,12 @@ const CameraHelper = {
       context.drawImage(this._videoCameraEl, 0, 0, this.width, this.height);
 
       const data = this._canvasCameraEl.toDataURL('image/png');
-      const splitData = data.split(",")[1];
+
       
-      console.log("ini console take picture", splitData);
+      console.log("ini console take picture", data);
 
       this.streaming = false;
-      return splitData;
+      return data;
     }
   },
 };
