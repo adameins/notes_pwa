@@ -93,7 +93,7 @@ const CameraHelper = {
       this._canvasCameraEl.height = this.height;
       context.drawImage(this._videoCameraEl, 0, 0, this.width, this.height);
 
-      const data = this._canvasCameraEl.toDataURL('image/png');
+      const data = this._canvasCameraEl.toDataURL('image/png')split(",")[1];
       
       console.log("ini console take picture", data);
 
