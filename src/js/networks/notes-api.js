@@ -11,7 +11,13 @@ class NotesApi {
       },
     });
 
-    return await response.json();
+    const responseData = await response.json();
+
+    responseData.data.sort((note1, note2) => {
+      return new Date(note2.createdAt) - new Date(note1.createdAt);
+    });
+  
+    return responseData;
   }
 
   static async getById(id) {
