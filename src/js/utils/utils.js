@@ -32,15 +32,15 @@ export const recognizePicture = async ({ photo, lang = 'eng' }) => {
   return text;
 };
 
-export const recognizePictureWithVision = async ({ base64Image }) => {
-  console.log("before", base64Image);
-  base64Image.split(",")[1];
+export const recognizePictureWithVision = async ({ photo }) => {
+  console.log("before", photo);
+  
   const response = await fetch('https://ocr-e77n4h2n5a-uc.a.run.app', {
     method: 'POST',
-    body: base64Image,
+    body: photo.split("base64,")[1],
   });
   
-  console.log("after", base64Image);
+  console.log("after", photo);
   return await response.json();
 };
 
