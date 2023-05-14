@@ -134,6 +134,7 @@ const PushNotificationHelper = {
 
   async _showOrHiddenSubscribeButton() {
     const state = (await this._anySubscriptionAvailable()) || false;
+    console.log("cuma test", state);
 
     if (state) {
       // hide subscribe button
