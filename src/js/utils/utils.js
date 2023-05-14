@@ -28,7 +28,9 @@ export const recognizePicture = async ({ photo, lang = 'eng' }) => {
   const {
     data: { text },
   } = await recognize(photo, lang);
-
+  
+  console.log("cekrek...");
+  console.log(text);
   return text;
 };
 
