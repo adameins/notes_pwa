@@ -27,10 +27,7 @@ const PushNotificationHelper = {
   },
 
   async _initialListener() {
-    this._subscribeButton.addEventListener('click', async (event) => {
-      // Request permission
-      await NotificationHelper.requestPermission();
-
+    this._subscribeButton.addEventListener('click', (event) => {
       this._subscribePushMessage(event);
     });
 
@@ -51,7 +48,7 @@ const PushNotificationHelper = {
       return;
     }
 
-    if (!(await NotificationHelper.isNotificationReady())) {
+    if (!(await NotificationHelper._isNotificationReady())) {
       console.log("Notification isn't available");
       return;
     }
@@ -86,7 +83,7 @@ const PushNotificationHelper = {
   async _unsubscribePushMessage(event) {
     event.stopPropagation();
 
-    console.log('_unsubscribePushMessage: Unsubscribing to push message...');
+    console.log('_subscribePushMessage: Unsubscribing to push message...');
     let pushSubscription = null;
     try {
       pushSubscription = await this._registrationServiceWorker?.pushManager.getSubscription();
@@ -134,7 +131,6 @@ const PushNotificationHelper = {
 
   async _showOrHiddenSubscribeButton() {
     const state = (await this._anySubscriptionAvailable()) || false;
-    console.log("cuma test", state);
 
     if (state) {
       // hide subscribe button
