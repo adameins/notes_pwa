@@ -33,12 +33,12 @@ export const recognizePicture = async ({ photo, lang = 'eng' }) => {
 };
 
 export const recognizePictureWithVision = async ({ base64Image }) => {
+  base64Image.slice(22);
   const response = await fetch('https://ocr-e77n4h2n5a-uc.a.run.app', {
     method: 'POST',
     body: base64Image,
   });
   
-  console.log("ini vision", base64Image);
   return await response.json();
 };
 
