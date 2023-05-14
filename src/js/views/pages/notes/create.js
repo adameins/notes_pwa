@@ -1,6 +1,6 @@
 import NotesApi from '../../../networks/notes-api';
 import CameraHelper from '../../../utils/camera-helper';
-import { recognizePicture } from '../../../utils/utils';
+import { recognizePicture, recognizePictureWithVision } from '../../../utils/utils';
 import { Modal } from 'bootstrap';
 
 const Create = {
@@ -133,7 +133,9 @@ const Create = {
     const getTextFromPictureBtn = document.getElementById('getTextFromPictureBtn');
     getTextFromPictureBtn.addEventListener('click', async (event) => {
       if (this._picture) {
-        this._bodyNote.value = await recognizePicture({ photo: this._picture });
+        const { text } = await recognizePictureWithVision({ photo: this._picture });
+
+        this._bodyNote.value = text;
         this._cameraModal.hide();
       }
     });
